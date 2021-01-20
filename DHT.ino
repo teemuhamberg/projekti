@@ -26,13 +26,13 @@ void setup() {
 }
 
 void loop() {
-  delay(1000); // viive
-
+  
   float h = dht.readHumidity();
   // Lue lämpötila
   float t = dht.readTemperature();
   
   // Tarkistaa meneekö lämpötilan luku läpi
+  // isnan = is not a number | Jos lämpötilan luku ei onnistu näyttöön tulee alla oleva virhe teksti.
   if (isnan(h) || isnan(t)) {
     Serial.println("Failed to read from DHT sensor!");
    }else{
@@ -47,7 +47,7 @@ void loop() {
     }
    }
     if(h > maxHum || t > maxTemp) {
-      digitalWrite(fan, HIGH);
+     digitalWrite(fan, HIGH);
   } else {
      digitalWrite(fan, LOW); 
   }
