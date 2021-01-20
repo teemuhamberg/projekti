@@ -26,7 +26,9 @@ void setup() {
 }
 
 void loop() {
-  
+
+  delay (1000);
+  // Lue kosteus
   float h = dht.readHumidity();
   // Lue lämpötila
   float t = dht.readTemperature();
