@@ -30,7 +30,7 @@ class DHT {
  public:
   DHT(uint8_t pin, uint8_t type, uint8_t count=6);
   void begin(void);
-  float readTemperature(bool S=false);
+  float readTemperature(bool S=false); // false -> true vaihtaa lämpötilan Farenheitiksi
   float convertCtoF(float);
   float convertFtoC(float);
   float computeHeatIndex(float tempFahrenheit, float percentHumidity);
