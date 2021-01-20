@@ -14,7 +14,7 @@ DHT::DHT(uint8_t pin, uint8_t type, uint8_t count) {
 }
 
 void DHT::begin(void) {
-  // set up the pins!
+  // pinnien kytkentä
   pinMode(_pin, INPUT);
   digitalWrite(_pin, HIGH);
   _lastreadtime = 0;
@@ -48,11 +48,11 @@ float DHT::readTemperature(bool S) {
   }
   return NAN;
 }
-
+//kaava celsius -> farenheit
 float DHT::convertCtoF(float c) {
 	return c * 9 / 5 + 32;
 }
-
+//kaava farenheit -> celsius
 float DHT::convertFtoC(float f) {
   return (f - 32) * 5 / 9; 
 }
@@ -97,14 +97,13 @@ boolean DHT::read(void) {
   uint8_t j = 0, i;
   unsigned long currenttime;
 
-  // Check if sensor was read less than two seconds ago and return early
-  // to use last reading.
-  currenttime = millis();
+  // Tarkistaa, onko anturi luettu alle sekuntia sitten
+  // jos ei niin lukee sen sitten
+    currenttime = millis();
   if (currenttime < _lastreadtime) {
-    // ie there was a rollover
-    _lastreadtime = 0;
+       _lastreadtime = 0;
   }
-  if (!firstreading && ((currenttime - _lastreadtime) < 2000)) {
+  if (!firstreading && ((currenttime - _lastreadtime) < 1000)) {
     return true; // return last correct measurement
     //delay(2000 - (currenttime - _lastreadtime));
   }
@@ -117,11 +116,11 @@ boolean DHT::read(void) {
 
   data[0] = data[1] = data[2] = data[3] = data[4] = 0;
   
-  // pull the pin high and wait 250 milliseconds
+  // Pinni high tilaan ja odota 250 millisekuntia
   digitalWrite(_pin, HIGH);
   delay(250);
 
-  // now pull it low for ~20 milliseconds
+  // Pinni low tilaan ja odota 20 millisekuntia
   pinMode(_pin, OUTPUT);
   digitalWrite(_pin, LOW);
   delay(20);
